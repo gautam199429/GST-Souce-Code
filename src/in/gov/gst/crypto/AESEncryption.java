@@ -225,8 +225,7 @@ public class AESEncryption {
 		return hash;
     }
 	public static void main(String args[])throws Exception{
-//		produceSampleData();
-//		encryjson();
+
 		authEk();
 	}
 }
