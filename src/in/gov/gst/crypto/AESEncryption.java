@@ -137,12 +137,13 @@ public class AESEncryption {
                 throws InvalidKeyException, IOException, IllegalBlockSizeException,
                 BadPaddingException,Exception {
 		SecretKeySpec sk = new SecretKeySpec(secret, AES_ALGORITHM);
+		System.out.println(sk);
 		DECRYPT_CIPHER.init(Cipher.DECRYPT_MODE, sk);		
           return DECRYPT_CIPHER.doFinal(Base64.decodeBase64(plainText));
     }
     public static byte[] authEk() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException, Exception
     {
-    	String sek= "fouulUffg9w1vsWon5muvyQLzhZkRr9beQqYDs+P82tYYaIrBdVh9gFjWj22OQUG";
+    	String sek= "3Yx53NvqfX473QUsGrjlB1Ss6mHEXodjwx8n7akfZiZYYaIrBdVh9gFjWj22OQUG";
     	byte[] authEK = AESEncryption.decrypt(sek, decodeBase64StringTOByte("Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8="));
     	System.out.println(authEK);
 		return authEK;
@@ -152,10 +153,10 @@ public class AESEncryption {
     public static String encryjson() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException, Exception
     {
     	
-    String encodedjson="ew0KICAgICJnc3RpbiI6ICIzM1RDQVROMjMxNEExWlQiLA0KICAgICJmcCI6ICIwNzIwMTciLA0KICAgICJndCI6IDM3ODI5NjkuMDEsDQogICAgImN1cl9ndCI6IDM3ODI5NjkuMDEsDQogICAgInZlcnNpb24iOiAiR1NUMS4yIiwNCiAgICAiYjJiIjogWw0KICAgICAgICB7DQogICAgICAgICAgICAiY3RpbiI6ICIwMUFBQkNFMjIwN1IxQzUiLA0KICAgICAgICAgICAgImludiI6IFsNCiAgICAgICAgICAgICAgICB7DQogICAgICAgICAgICAgICAgICAgICJpbnVtIjogIlMwMDg0MDAiLA0KICAgICAgICAgICAgICAgICAgICAiaWR0IjogIjI0LTExLTIwMTYiLA0KICAgICAgICAgICAgICAgICAgICAidmFsIjogNzI5MjQ4LjE2LA0KICAgICAgICAgICAgICAgICAgICAicG9zIjogIjA2IiwNCiAgICAgICAgICAgICAgICAgICAgInJjaHJnIjogIk4iLA0KICAgICAgICAgICAgICAgICAgICAiZXRpbiI6ICIwMUFBQkNFNTUwN1IxQzQiLA0KICAgICAgICAgICAgICAgICAgICAiaW52X3R5cCI6ICJSIiwNCiAgICAgICAgICAgICAgICAgICAgIml0bXMiOiBbDQogICAgICAgICAgICAgICAgICAgICAgICB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIm51bSI6IDEsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIml0bV9kZXQiOiB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJydCI6IDUsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJ0eHZhbCI6IDEwMDAwLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaWFtdCI6IDgzMy4zMywNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImNzYW10IjogNTAwDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICBdDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgXQ0KICAgICAgICB9DQogICAgXQ0KfQ==";
+    String encodedjson="ew0KICAgICJnc3RpbiI6ICIyN0JDQU1IMDQ5OEMxWjMiLA0KICAgICJmcCI6ICIwNzIwMTciLA0KICAgICJndCI6IDM3ODI5NjkuMDEsDQogICAgImN1cl9ndCI6IDM3ODI5NjkuMDEsDQogICAgInZlcnNpb24iOiAiR1NUMS4yIiwNCiAgICAiYjJiIjogWw0KICAgICAgICB7DQogICAgICAgICAgICAiY3RpbiI6ICIwMUFBQkNFMjIwN1IxQzUiLA0KICAgICAgICAgICAgImludiI6IFsNCiAgICAgICAgICAgICAgICB7DQogICAgICAgICAgICAgICAgICAgICJpbnVtIjogIlMwMDg0MDAiLA0KICAgICAgICAgICAgICAgICAgICAiaWR0IjogIjI0LTExLTIwMTYiLA0KICAgICAgICAgICAgICAgICAgICAidmFsIjogNzI5MjQ4LjE2LA0KICAgICAgICAgICAgICAgICAgICAicG9zIjogIjA2IiwNCiAgICAgICAgICAgICAgICAgICAgInJjaHJnIjogIk4iLA0KICAgICAgICAgICAgICAgICAgICAiZXRpbiI6ICIwMUFBQkNFNTUwN1IxQzQiLA0KICAgICAgICAgICAgICAgICAgICAiaW52X3R5cCI6ICJSIiwNCiAgICAgICAgICAgICAgICAgICAgIml0bXMiOiBbDQogICAgICAgICAgICAgICAgICAgICAgICB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIm51bSI6IDEsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIml0bV9kZXQiOiB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJydCI6IDUsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJ0eHZhbCI6IDEwMDAwLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaWFtdCI6IDgzMy4zMywNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImNzYW10IjogNTAwDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICBdDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgXQ0KICAgICAgICB9DQogICAgXQ0KfQ==";
     	byte[] enc = encodedjson.getBytes();
     //		byte [] authek = "[B@35851384";
-    	byte[] authEK = AESEncryption.decrypt("fouulUffg9w1vsWon5muvyQLzhZkRr9beQqYDs+P82tYYaIrBdVh9gFjWj22OQUG", decodeBase64StringTOByte("Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8="));
+    	byte[] authEK = AESEncryption.decrypt("3Yx53NvqfX473QUsGrjlB1Ss6mHEXodjwx8n7akfZiZYYaIrBdVh9gFjWj22OQUG", decodeBase64StringTOByte("Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8="));
     	System.out.println(authEK);
     	String encjson = AESEncryption.encryptEK(enc,authEK);
     	System.out.println("Encrypted Json:------"+encjson);
@@ -177,7 +178,7 @@ public class AESEncryption {
 			
 					
 			//Generation of OTP with appkey
-			String otp = "585225";
+			String otp = "795674";
 			String encryptedOtp = encryptEK(otp.getBytes(),decodeBase64StringTOByte("Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8="));
 			System.out.println("Encrypted OTP :"+encryptedOtp);
 			
@@ -224,7 +225,9 @@ public class AESEncryption {
 		return hash;
     }
 	public static void main(String args[])throws Exception{
-		encryjson();
+//		produceSampleData();
+//		encryjson();
+		authEk();
 	}
 }
 
