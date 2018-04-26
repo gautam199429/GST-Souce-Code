@@ -146,6 +146,7 @@ public class AESEncryption {
     	String sek= "3Yx53NvqfX473QUsGrjlB1Ss6mHEXodjwx8n7akfZiZYYaIrBdVh9gFjWj22OQUG";
     	byte[] authEK = AESEncryption.decrypt(sek, decodeBase64StringTOByte("Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8="));
     	System.out.println(authEK);
+    	
 		return authEK;
     	
     }
@@ -153,7 +154,7 @@ public class AESEncryption {
     public static String encryjson() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException, IOException, Exception
     {
     	
-    String encodedjson="ew0KICAgICJnc3RpbiI6ICIyN0JDQU1IMDQ5OEMxWjMiLA0KICAgICJmcCI6ICIwNzIwMTciLA0KICAgICJndCI6IDM3ODI5NjkuMDEsDQogICAgImN1cl9ndCI6IDM3ODI5NjkuMDEsDQogICAgInZlcnNpb24iOiAiR1NUMS4yIiwNCiAgICAiYjJiIjogWw0KICAgICAgICB7DQogICAgICAgICAgICAiY3RpbiI6ICIwMUFBQkNFMjIwN1IxQzUiLA0KICAgICAgICAgICAgImludiI6IFsNCiAgICAgICAgICAgICAgICB7DQogICAgICAgICAgICAgICAgICAgICJpbnVtIjogIlMwMDg0MDAiLA0KICAgICAgICAgICAgICAgICAgICAiaWR0IjogIjI0LTExLTIwMTYiLA0KICAgICAgICAgICAgICAgICAgICAidmFsIjogNzI5MjQ4LjE2LA0KICAgICAgICAgICAgICAgICAgICAicG9zIjogIjA2IiwNCiAgICAgICAgICAgICAgICAgICAgInJjaHJnIjogIk4iLA0KICAgICAgICAgICAgICAgICAgICAiZXRpbiI6ICIwMUFBQkNFNTUwN1IxQzQiLA0KICAgICAgICAgICAgICAgICAgICAiaW52X3R5cCI6ICJSIiwNCiAgICAgICAgICAgICAgICAgICAgIml0bXMiOiBbDQogICAgICAgICAgICAgICAgICAgICAgICB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIm51bSI6IDEsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgIml0bV9kZXQiOiB7DQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJydCI6IDUsDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICJ0eHZhbCI6IDEwMDAwLA0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAiaWFtdCI6IDgzMy4zMywNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgImNzYW10IjogNTAwDQogICAgICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgICAgICAgICBdDQogICAgICAgICAgICAgICAgfQ0KICAgICAgICAgICAgXQ0KICAgICAgICB9DQogICAgXQ0KfQ==";
+    String encodedjson="";
     	byte[] enc = encodedjson.getBytes();
     //		byte [] authek = "[B@35851384";
     	byte[] authEK = AESEncryption.decrypt("3Yx53NvqfX473QUsGrjlB1Ss6mHEXodjwx8n7akfZiZYYaIrBdVh9gFjWj22OQUG", decodeBase64StringTOByte("Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8="));
@@ -162,6 +163,8 @@ public class AESEncryption {
     	System.out.println("Encrypted Json:------"+encjson);
     	String hmackey = AESEncryption.generateHmac(encodedjson, authEK);
     	System.out.println("hmac:-----"+hmackey);
+    	String jsonData = new String(decodeBase64StringTOByte(new String(decrypt(encjson, authEK))));
+    	System.out.println(jsonData);
     	return null;
     	
     }
@@ -179,7 +182,7 @@ public class AESEncryption {
 					
 			//Generation of OTP with appkey
 			String otp = "795674";
-			String encryptedOtp = encryptEK(otp.getBytes(),decodeBase64StringTOByte("Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8="));
+			String encryptedOtp = encryptEK(otp.getBytes(),decodeBase64StringTOByte("0g1/JNhjsaqqJIzlZVDuv6A0Yog6amLWX9UC+BoaQWo="));
 			System.out.println("Encrypted OTP :"+encryptedOtp);
 			
 				
@@ -189,26 +192,7 @@ public class AESEncryption {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    }
-//    public static void testData(){
-//		try {
-//			
-//			
-//			String decrypted_appkey = "41+sD/gm9DWQeZbJm98qb3ss9Eu96XkClU5a4hyfaAw=";
-//			String receivedSEK = "yDWrI0m6juY+MKsPNtWkBYJAVsE0XIQvAJwv+P2T9DgOLzbTmU1E5NkewRcnIsK2";
-//			String gotREK = "QdwtOmbHgs5+T6XguaXrJtXyc1EpapQzuV5wWgEiDbUdShGCyOtl6JelLUI/R5xt";
-//			String data="czI9UduToC0S2M/Z8NxmD6AaiCHqK/wN4cLnpjje1LCgo7hXhoGvSUac0BB9umkBnWEO+osui4ZZHZIHrO8bvMlQI5mmyuqDxqLTg5IkgYCzUnDWGV6qP/6ei2J8eCKLxqv0XALN228h0QhNK4nr3Q9n4HVGngdXJf1dSIcxNVXQaJTctti1w7n6bm5Ht2FlMVKsIT7O8bwD9OyJtV0Z0jZa45DoWMxIwbRQKTnBCzC7+gCWSBriGW1Bsc4AGMzQks8qE0y1rQscgtPp8D6/eHjIT5e3jwn9EWYZdgDb+y1sCaUL77AEvKm9inM3fyfj3yw11I31NX79KVFzKCOFA3gfuz2RhTZ5QnxuUABGuHXDrLKaYkkxa6f0GPBDJmUqs5/R1w2YjpOzdDG+i0zRjPvIdSpM4wzVt0dB449TplAftdPkLCmVKBovrLe8OwE58nI5j63Kr8JMFc/V8XBFDpRDZl4EgdLeKWX4rop67GeWUVjdIyyAuiOiXTi/v9r1EGpFzybDJE2Z9S2/ntK5iVsPT6Bn4MaqkTiOG5D3eh5aDNuM3mToDC6LSD7PkX9Ekt1R/T1dLeKDOnEo5aQqCcqm/v5A9AZw86nyzFPfdjLfl9TOem4/hSP8Xslx645jnhUlr3kkshw5LzRpx5KaC32PC+eOcRq6MEeVF6vStvA/XA/9dRazxwvPnS4z09gtSdZRozls1UmNjBkhSoh4tDSU0lQXIsrmr/tGtLSsj1fH7h5De+qBvhyvY3LOw6CGfq3dKUFcE0n4yLosMIm2xbtVzROGdNXgDmUPUmk9wXHLc5UA8GNY9rq1z1ypCBbYpHLCQ9NHLncweF2FOK2obqF3kioypUbPxndgtd4cbVReXf9XBL9YkkxDCvNjH44bz0ciVnhg9jwGETLU6z40/s3ew8dDrNCbUmrGK42YxB44Ljwk5RQBRa5uMJnrFKiR8dnUJZai12moHO6GzIg5yiYEEa65rbzgdJOozcjTXgLl2Mf1uR4jN3Y7+u/e4OcYNHlF2Jd/7EGH+sJ9aOIYsq0K8f82o4jbbInhSg37pv2Kf5fm6urd4UoQUJ01fGGOHytSegKX2wO9vlKhHyrbu1+zMnfjEXabjENTlLWS5npkDhO7CaVsK4XsxTucsSdXKg3w7n82C05acOwrvewHCMNWD1IZuuKKcHWLhd7khs0gGRSQR4eKbN17fuYg2aTkQM/n1/8/NZP35UsMt+w9zpewE1wQr6C4guFoiIS1IUReJwFqCBAHsyXCnSdVjZlzZu40KYGWjR3TmkG4vVZA22cxsq83Oc/aykrflL0f1QI6txyfqSZAlpNEqKHerDR/iGAgwYa5f9y8Id7hnyK1lU0NnkAbKbBh9GWuvtBiNL7AvrDNMLt2lStyuDhh0TTscAqFv26jjAtz2MoEZ9HPvoBPDAsxq0HGFeoypyeQKZI0/xTh+iVcsMxgqY5FeOEiWEW/cBBJZOP402+319jDlDoSRerbUKwP63TLxE/zL2j4YyxHTEWi9PUiF+JosUHmza9PiyTdbIxyrhxXDfKVoQ==";			
-//			byte[] authEK = decrypt(receivedSEK, decodeBase64StringTOByte(decrypted_appkey));
-//			System.out.println("Encoded Auth EK (Received):"+ encodeBase64String(authEK));			
-//			byte[] apiEK = decrypt(gotREK, authEK);
-//			System.out.println("Encoded Api EK (Received):"+ encodeBase64String(apiEK));
-//			String jsonData = new String(decodeBase64StringTOByte(new String(decrypt(data, apiEK))));
-//			System.out.println(jsonData);			
-//		}  catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//    }    
+    }   
     public static String generateHmac(String data, byte[] ek)
     {
     	String hash = null;
@@ -226,25 +210,14 @@ public class AESEncryption {
     }
 	public static void main(String args[])throws Exception{
 
-		authEk();
+//		encryjson();
+////	authEk();
+		produceSampleData();
 	}
 }
 
-//App key in encoded :Nq7652e5EAMpgJCUSXLC/TH/9lESVsbSyGhrOKzswC8=
-//Encrypted App Key :yGyvipLHlL7ig9FnI3igbC/cYZde6NadzgWZ8pHgQX7y2coQl6W+rGA+nxB+QDu5QzGQ1Y77/1eG718TJ5h3FgrKhghIybe2ecuSVQz6S4s/GEZhV+grU+/gqaFInQLs+F6Ne2yjAVgii3UlYs9tKZH8X4mORUvgxBirJUweZsjWy5F//KzvmziYhno9MXGahs7Qr+04A/69z6FbDavIeTyp28qnRYTEtZGi30Nzj2jUXZlGAbrw1zR+FBUuYXMKYzKHDn338/Ij9TFtMPMtHjkqbHw6qbwyShyQQfqCr9AbbiksSM7UrVjquEigEnOupkHBdhrOjSSncrmYYTCXeg==
-//Encrypted OTP :kOKhT6v2lPIcC6jrBDA1Fg==
+// Encoded payload = eyJnc3RpbiI6ICIyN0JDQU1IMDQ5OEMxWjMiLCJmcCI6ICIwNzIwMTciLCJndCI6IDM3ODI5NjkuMDEsImN1cl9ndCI6IDM3ODI5NjkuMDEsImIyYiI6IFt7ImN0aW4iOiAiMjdCQ0FNSDA0OThDMVozIiwiaW52IjogW3siaW51bSI6ICJTMDA4NDAwIiwiaWR0IjogIjI0LTExLTIwMTYiLCJ2YWwiOiA3MjkyNDguMTYsInBvcyI6ICIwNiIsInJjaHJnIjogIk4iLCJldGluIjogIjI3QkNBTUgwNDk4QzFaMyIsImludl90eXAiOiAiUiIsIml0bXMiOiBbeyJudW0iOiAxLCJpdG1fZGV0IjogeyJydCI6IDUsInR4dmFsIjogMTAwMDAsImlhbXQiOiA4MzMuMzMsImNzYW10IjogNTAwfX1dfV19XX0=
+//javax.crypto.spec.SecretKeySpec@15fda
+//App key in encoded :0g1/JNhjsaqqJIzlZVDuv6A0Yog6amLWX9UC+BoaQWo=
+//Encrypted App Key :f8DAI/QQHDpC8fVybDjTfhJBeI7r3JuZz56kf/0ODMMYHSGcTr7MH2TWZ3Panqf+Ee2f1cgA1ruchqw+RdFfjBGFD2go9zQALVc2Z1p5AS/4kyQteTYHtU5WPXtIBlehkz3BBrTZQUp/FI9LgLBNNu4omVQ0G3zueKoZyIyLhrb7WYQ4M00WFbEGaneZqk2G5VQGZBOLjeiicL7KBBCYRTcdNSbcKwglRv0YKNwcYjkNfBVxW3cnFNrITK3n3hx4u1vSwGwyyL+LLdRti/0GpabtkMBsUjXlB8aRpd6g4vVPTFZ3YltwYd2zI+QPjiswuuF0VFiVG8Z5ugb2ILbfaQ==
 
-
-//{
-//    "status_cd": "1",
-//    "auth_token": "46c8db2decd24f438c2a3f5df29bae50",
-//    "expiry": 120,
-//    "sek": "fouulUffg9w1vsWon5muvyQLzhZkRr9beQqYDs+P82tYYaIrBdVh9gFjWj22OQUG"
-//}
-
-//authsek [B@35851384
-
-//Encrypted Json:------ye3SRSNF0GrEmHElaC0szgKq/fjbjD2QJjIPs/TkuXAEj7cGzrTLZtbK35bx+1FFvyO2CIvkNz6OqZ8Tjy4iuLaTs5Qu5QB0vB99UU3f9IbPEgpNA+TskkTgK/ktguXDLmP3t7gobrGIb5kG99AdUt1EYuZd1xMmn3y0TxnqxIeU4w9s1dsWuHm1Lczo0UzB2irdxLJ3oPxmd+61qgJ4zkPj0fisKPNJnJJHUDuM22l3OecQvQ9Wt7vj1Zgz4NYtNyK0kLRptFVlX1mty7y5jM9PXNv/uuQRE2zNxobH2RRFkxGXdqjFvLMQHwbYtqxpDD1WEChO9m/UACiWpOgGh9m/e96W90FjiO32ahVdzbZrxUBY3lEBDsvIvHl3dplM1zfhYnyeJbXHYXjPYzDQxuzE4blBSJAUckmIBOwbyPP8wDAcAfxQcWXOzT/QEyLsYlNIN3jox67FpxzMz+CHTaL23wu3W2NLwTimNF4whg085V1Gz5zftJRHr9mld4dwn1iCd7HyMwJf/B9KJFfzqrAlSDc6ejk97Ke1JXtomq0QLRMCNkmCctoQX2ED7iEy/MAwHAH8UHFlzs0/0BMi7FjHOKFpXcQtJkcm/42udVScwlrOM8J8ZJcT06vD31Y//MAwHAH8UHFlzs0/0BMi7MVHg7kNsplvJ/4kSC2FHiJfYUbgKrvfLLSdh5+LaAaF/MAwHAH8UHFlzs0/0BMi7FZqqPja78PXpUlAy02oAbkiemFu7U1a5/8hkvgddX1m/MAwHAH8UHFlzs0/0BMi7Mq9Nzw3rY+QpXAGPr9/DszR6wrlJDzGKpIo5lwrl8byndaTBHJ80lEEwZtCj/zXYPzAMBwB/FBxZc7NP9ATIuzJwc4EZatgZSxfAzL0Z4ob2WA0D8HqpnllzgxybwzwnvzAMBwB/FBxZc7NP9ATIuwtaxZusUPq5mbFMu1fdwtDOh8Nwd4XRMoEyLsQiQVkCPzAMBwB/FBxZc7NP9ATIux7LcN4WTbhqsETavt2Gne4/MAwHAH8UHFlzs0/0BMi7PzAMBwB/FBxZc7NP9ATIuzYHKSQfu/LG7aaVemdcnwl/MAwHAH8UHFlzs0/0BMi7PzAMBwB/FBxZc7NP9ATIuwYx9Rndhjg/GyPFDlaBa/QWmZ8ds9YqtYXC7FseHUZGfzAMBwB/FBxZc7NP9ATIuz8wDAcAfxQcWXOzT/QEyLs1X5dHZzriMfrblNY9GL8q/zAMBwB/FBxZc7NP9ATIuz8wDAcAfxQcWXOzT/QEyLsqNqGcnM7AblSKM9eAx0OPxmjQTlizIpl8ZF8Frac/lv8wDAcAfxQcWXOzT/QEyLs/MAwHAH8UHFlzs0/0BMi7NiNWMVzjbvweIhrazZU/O1Pk4TpkrCfCJlD2j2W/unxnkhdi/nkBU7INbl6hbCjq/zAMBwB/FBxZc7NP9ATIuydhT1hBaQGuJv2OAaRVhfNaqrLhgtGE8Ncd2pUqP+Wx/zAMBwB/FBxZc7NP9ATIuz8wDAcAfxQcWXOzT/QEyLsr9yat+7+IYU80SV2z7Je5fzAMBwB/FBxZc7NP9ATIuyxqU/gsRMFT+cpE/Fl7UYC/MAwHAH8UHFlzs0/0BMi7GGnzO7f5LahlyNn10B19xH8wDAcAfxQcWXOzT/QEyLsCmFI0ANb7ZtRILQ3xF4ooPs+gMtsmTGGM6K/Vh2ZQ/kKDEv7uhpuWMBlQdC2/qUVsz1tKl7L1zbGoUfe1eGAiA==
-//javax.crypto.spec.SecretKeySpec@fa77dc64
-//HFeebDxfRIJL16ag2zJCiXpfI1S/IxPFAPGFQgdwyew=
-//hmac:-----HFeebDxfRIJL16ag2zJCiXpfI1S/IxPFAPGFQgdwyew=
